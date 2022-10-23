@@ -1,50 +1,55 @@
-@model Offer
+@model Function
 @{
-ViewData["Title"] = "Create Offer";
+ViewData["Title"] = "Update Function";
 }
 
 <section class="container mt-5 pt-5">
     <h1 class="text-primary mt-5">
-        Create a new offer
+        Update Function
     </h1>
     <hr />
 
-    <form method="post" enctype="multipart/form-data" asp-action="Create" class="mt-5 w-50 mx-auto">
+    <form method="post" enctype="multipart/form-data" asp-action="Update" class="mt-5 w-50 mx-auto">
         <div class="mb-3">
             <label asp-for="Name" class="form-label">
-                Offer's Name
+                Function's Name
             </label>
             <input type="text" asp-for="Name" class="form-control" placeholder="Enter Name..." required>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label asp-for="Description" class="form-label">
-                Offer's Description
+            <label asp-for="Icon" class="form-label">
+                Function's Icon
             </label>
-            <input type="text" asp-for="Description" class="form-control" placeholder="Enter Description..." required>
-            <span asp-validation-for="Description" class="text-danger"></span>
+            <input type="text" asp-for="Icon" class="form-control" placeholder="Enter Icon..." required>
+            <span asp-validation-for="Icon" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Body" class="form-label">
-                Offer's Internal Body
+                Function's Internal Body
             </label>
             <textarea asp-for="Body" id="Body" class="form-control"></textarea>
             <span asp-validation-for="Body" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="ImagePath" class="form-label">
-                Offer's Image
+                Function's Image
             </label>
             <input type="file" name="ImagePath" asp-for="ImagePath" class="form-control custom-file-input"
-                id="customFile" required>
+                id="customFile">
             <span asp-validation-for="ImagePath" class="text-danger"></span>
         </div>
-
         <div class="mb-5">
             <button type="submit" class="btn btn-primary w-100">
-                Create Offer
-                <i class="fa fa-plus"></i>
+                Update Function
+                <i class="fa fa-edit"></i>
             </button>
+        </div>
+        <div class="mb-5">
+            <a asp-controller="Function" asp-action="Delete" asp-route-id="@ViewBag.id" class="btn btn-danger w-100">
+                Delete Function
+                <i class="fa fa-trash"></i>
+            </a>
         </div>
     </form>
 

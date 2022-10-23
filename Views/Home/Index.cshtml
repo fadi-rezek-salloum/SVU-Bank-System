@@ -66,9 +66,13 @@
                         <p class="card-text">
                             @function.Description
                         </p>
-                        <a asp-controller="Function" asp-action="Create" class="btn btn-primary w-100">
+                        <a asp-controller="Function" asp-action="Details" asp-route-id="@function.Id" class="btn btn-primary w-100">
                             View Details
                             <i class="fa fa-arrow-right"></i>
+                        </a>
+                        <a asp-controller="Function" asp-action="Update" asp-route-id="@function.Id" class="btn btn-danger w-100 mt-3">
+                            Update Function
+                            <i class="fa fa-edit"></i>
                         </a>
                     </div>
                 </div>
@@ -93,12 +97,15 @@
                             @product.Name
                         </h4>
                         <p class="card-text">
-                            @* @Html.Raw(product.Body) *@
                             @product.Description
                         </p>
-                        <a asp-controller="Product" asp-action="Create" class="btn btn-primary w-100">
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary w-100">
                             View Details
                             <i class="fa fa-arrow-right"></i>
+                        </a>
+                        <a asp-controller="Product" asp-action="Update" asp-route-id="@product.Id" class="btn btn-danger w-100 mt-3">
+                            Update Product
+                            <i class="fa fa-edit"></i>
                         </a>
                     </div>
                 </div>
@@ -110,7 +117,7 @@
 
 <section class="container my-5">
     <h1 class="text-primary">
-        Latest functions
+        Latest Offers
     </h1>
 
     <div class="row">
@@ -125,9 +132,13 @@
                         <p class="card-text">
                             @offer.Description
                         </p>
-                        <a asp-controller="Offer" asp-action="Create" class="btn btn-primary w-100">
+                        <a asp-controller="Offer" asp-action="Details" asp-route-id="@offer.Id" class="btn btn-primary w-100">
                             View Details
                             <i class="fa fa-arrow-right"></i>
+                        </a>
+                        <a asp-controller="Offer" asp-action="Update" asp-route-id="@offer.Id" class="btn btn-danger w-100 mt-3">
+                            Update Offer
+                            <i class="fa fa-edit"></i>
                         </a>
                     </div>
                 </div>

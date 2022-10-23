@@ -14,7 +14,6 @@ namespace BankApp.Models
         public string Icon { get; set; }
         [Required]
         public string Body { get; set; }
-        [Required]
         public string ImagePath { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
     }

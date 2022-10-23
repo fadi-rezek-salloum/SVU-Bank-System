@@ -9,7 +9,6 @@ namespace BankApp.ViewModels
         public string Icon { get; set; }
         [Required]
         public string Body { get; set; }
-        [Required]
         public IFormFile ImagePath { get; set; }
     }
 }

@@ -15,25 +15,29 @@ ViewData["Title"] = "Create Product";
                 Product's Name
             </label>
             <input type="text" asp-for="Name" class="form-control" placeholder="Enter Name..." required>
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Description" class="form-label">
                 Product's Description
             </label>
             <input type="text" asp-for="Description" class="form-control" placeholder="Enter Description..." required>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Body" class="form-label">
                 Product's Internal Body
             </label>
             <textarea asp-for="Body" id="Body" class="form-control"></textarea>
+            <span asp-validation-for="Body" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="ImagePath" class="form-label">
                 Product's Image
             </label>
             <input type="file" name="ImagePath" asp-for="ImagePath" class="form-control custom-file-input"
-                id="customFile">
+                id="customFile" required>
+            <span asp-validation-for="ImagePath" class="text-danger"></span>
         </div>
 
         <div class="mb-5">

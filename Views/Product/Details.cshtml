@@ -1,0 +1,35 @@
+@model Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<section class="mt-5 pt-5 container">
+    <div class="row mt-5">
+        <div class="col-6 col-md-6 col-sm-12">
+            <img src="~/uploads/@ViewBag.product.ImagePath" alt="Details" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-6 col-md-6 col-sm-12">
+            <h1 class="text-primary display-2 text-center">
+                @ViewBag.product.Name
+            </h1>
+            <h2 class="text-primary mt-5">
+                @ViewBag.product.Description
+            </h2>
+            <h5 class="text-secondary text-center mt-5">
+                <i class="fa fa-calendar"></i>
+                @ViewBag.product.Created
+            </h5>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12">
+            <h1 class="text-primary text-center">
+                Content
+            </h1>
+        </div>
+        <div class="col-12 mt-5 border shadow pt-3">
+            @Html.Raw(ViewBag.product.Body)
+        </div>
+    </div>
+</section>

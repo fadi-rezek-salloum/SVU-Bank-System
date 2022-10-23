@@ -41,7 +41,69 @@ namespace BankApp.Controllers
             }
             return View();
         }
+        public IActionResult Details(int? id)
+        {
+            if ( id == null || id == 0 ) {
+                return NotFound();
+            }
+            var offerFromDb = _db.Offers.Find(id);
 
+            if ( offerFromDb == null ) {
+                return NotFound();
+            }
+
+            ViewBag.offer = offerFromDb;
+
+            return View();
+        }
+
+        public IActionResult Update(int? id)
+        {
+            if ( id == null || id == 0 ) {
+                return NotFound();
+            }
+            var offerFromDb = _db.Offers.Find(id);
+
+            if ( offerFromDb == null ) {
+                return NotFound();
+            }
+
+            ViewBag.id = id;
+
+            return View(offerFromDb);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(OfferViewModel model, int? id)
+        {
+            if ( ModelState.IsValid ) {
+                string uniqueFileName = UploadedFile(model);
+
+                var offer = _db.Offers.Find(id);
+                offer.Name = model.Name;
+                offer.Description = model.Description;
+                offer.Body = model.Body;
+
+                if ( uniqueFileName != null ) {
+                    offer.ImagePath = uniqueFileName;
+                }
+
+                _db.Update(offer);
+                _db.SaveChanges();
+                return RedirectToAction("Update");
+            }
+            return View();
+        }
+        public IActionResult Delete(int? id)
+        {
+            var obj = _db.Offers.Find(id);
+            if ( obj == null ) {
+                return NotFound();
+            }
+            _db.Offers.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
         private string UploadedFile(OfferViewModel model) {
             string uniqueFileName = null;
             if ( model.ImagePath != null ) {

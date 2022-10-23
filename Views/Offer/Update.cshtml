@@ -1,15 +1,15 @@
 @model Offer
 @{
-ViewData["Title"] = "Create Offer";
+ViewData["Title"] = "Update Offer";
 }
 
 <section class="container mt-5 pt-5">
     <h1 class="text-primary mt-5">
-        Create a new offer
+        Update Offer
     </h1>
     <hr />
 
-    <form method="post" enctype="multipart/form-data" asp-action="Create" class="mt-5 w-50 mx-auto">
+    <form method="post" enctype="multipart/form-data" asp-action="Update" class="mt-5 w-50 mx-auto">
         <div class="mb-3">
             <label asp-for="Name" class="form-label">
                 Offer's Name
@@ -36,15 +36,20 @@ ViewData["Title"] = "Create Offer";
                 Offer's Image
             </label>
             <input type="file" name="ImagePath" asp-for="ImagePath" class="form-control custom-file-input"
-                id="customFile" required>
+                id="customFile">
             <span asp-validation-for="ImagePath" class="text-danger"></span>
         </div>
-
         <div class="mb-5">
             <button type="submit" class="btn btn-primary w-100">
-                Create Offer
-                <i class="fa fa-plus"></i>
+                Update Offer
+                <i class="fa fa-edit"></i>
             </button>
+        </div>
+        <div class="mb-5">
+            <a asp-controller="Offer" asp-action="Delete" asp-route-id="@ViewBag.id" class="btn btn-danger w-100">
+                Delete Offer
+                <i class="fa fa-trash"></i>
+            </a>
         </div>
     </form>
 

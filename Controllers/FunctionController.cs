@@ -41,6 +41,69 @@ namespace BankApp.Controllers
             }
             return View();
         }
+        public IActionResult Details(int? id)
+        {
+            if ( id == null || id == 0 ) {
+                return NotFound();
+            }
+            var functionFromDb = _db.Functions.Find(id);
+
+            if ( functionFromDb == null ) {
+                return NotFound();
+            }
+
+            ViewBag.function = functionFromDb;
+
+            return View();
+        }
+
+        public IActionResult Update(int? id)
+        {
+            if ( id == null || id == 0 ) {
+                return NotFound();
+            }
+            var functionFromDb = _db.Functions.Find(id);
+
+            if ( functionFromDb == null ) {
+                return NotFound();
+            }
+
+            ViewBag.id = id;
+
+            return View(functionFromDb);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(FunctionViewModel model, int? id)
+        {
+            if ( ModelState.IsValid ) {
+                string uniqueFileName = UploadedFile(model);
+
+                var function = _db.Functions.Find(id);
+                function.Name = model.Name;
+                function.Icon = model.Icon;
+                function.Body = model.Body;
+
+                if ( uniqueFileName != null ) {
+                    function.ImagePath = uniqueFileName;
+                }
+
+                _db.Update(function);
+                _db.SaveChanges();
+                return RedirectToAction("Update");
+            }
+            return View();
+        }
+        public IActionResult Delete(int? id)
+        {
+            var obj = _db.Functions.Find(id);
+            if ( obj == null ) {
+                return NotFound();
+            }
+            _db.Functions.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
         private string UploadedFile(FunctionViewModel model) {
             string uniqueFileName = null;
             if ( model.ImagePath != null ) {
