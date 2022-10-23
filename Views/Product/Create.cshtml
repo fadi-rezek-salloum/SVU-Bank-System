@@ -1,0 +1,47 @@
+@model Product
+@{
+ViewData["Title"] = "Create Product";
+}
+
+<section class="container mt-5 pt-5">
+    <h1 class="text-primary mt-5">
+        Create a new product
+    </h1>
+    <hr />
+
+    <form method="post" enctype="multipart/form-data" asp-action="Create" class="mt-5 w-50 mx-auto">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">
+                Product's Name
+            </label>
+            <input type="text" asp-for="Name" class="form-control" placeholder="Enter Name..." required>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">
+                Product's Description
+            </label>
+            <input type="text" asp-for="Description" class="form-control" placeholder="Enter Description..." required>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Body" class="form-label">
+                Product's Internal Body
+            </label>
+            <textarea asp-for="Body" id="Body" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ImagePath" class="form-label">
+                Product's Image
+            </label>
+            <input type="file" name="ImagePath" asp-for="ImagePath" class="form-control custom-file-input"
+                id="customFile">
+        </div>
+
+        <div class="mb-5">
+            <button type="submit" class="btn btn-primary w-100">
+                Create Product
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </form>
+
+</section>

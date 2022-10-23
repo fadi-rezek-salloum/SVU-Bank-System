@@ -1,0 +1,47 @@
+@model Function
+@{
+ViewData["Title"] = "Create Function";
+}
+
+<section class="container mt-5 pt-5">
+    <h1 class="text-primary mt-5">
+        Create a new function
+    </h1>
+    <hr />
+
+    <form method="post" enctype="multipart/form-data" asp-action="Create" class="mt-5 w-50 mx-auto">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">
+                Function's Name
+            </label>
+            <input type="text" asp-for="Name" class="form-control" placeholder="Enter Name..." required>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Icon" class="form-label">
+                Function's Icon
+            </label>
+            <input type="text" asp-for="Icon" class="form-control" placeholder="Enter Icon..." required>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Body" class="form-label">
+                Function's Internal Body
+            </label>
+            <textarea asp-for="Body" id="Body" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ImagePath" class="form-label">
+                Function's Image
+            </label>
+            <input type="file" name="ImagePath" asp-for="ImagePath" class="form-control custom-file-input"
+                id="customFile">
+        </div>
+
+        <div class="mb-5">
+            <button type="submit" class="btn btn-primary w-100">
+                Create Function
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </form>
+
+</section>

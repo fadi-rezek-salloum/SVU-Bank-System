@@ -1,5 +1,6 @@
 ﻿@{ ViewData["Title"] = "Home"; }
 
+
 <section id="carouselExampleCaptions" class="carousel slide mt-1 carousel-fade" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -46,4 +47,92 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+</section>
+
+<section class="container mt-5">
+    <h1 class="text-primary">
+        Functions
+    </h1>
+
+    <div class="row">
+        @foreach(var function in ViewBag.functionsList) {
+            <div class="col-4">
+                <div class="card mt-5 rounded shadow" style="width: 22rem;">
+                    <img src="~/uploads/@function.ImagePath" alt="function Image" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            @function.Name
+                        </h4>
+                        <p class="card-text">
+                            @function.Description
+                        </p>
+                        <a asp-controller="Function" asp-action="Create" class="btn btn-primary w-100">
+                            View Details
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</section>
+
+<section class="container mt-5">
+    <h1 class="text-primary">
+        Featured Products
+    </h1>
+
+    <div class="row">
+        @foreach(var product in ViewBag.productsList) {
+            <div class="col-4">
+                <div class="card mt-5 rounded shadow" style="width: 22rem;">
+                    <img src="~/uploads/@product.ImagePath" alt="Product Image" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            @product.Name
+                        </h4>
+                        <p class="card-text">
+                            @* @Html.Raw(product.Body) *@
+                            @product.Description
+                        </p>
+                        <a asp-controller="Product" asp-action="Create" class="btn btn-primary w-100">
+                            View Details
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</section>
+
+<section class="container my-5">
+    <h1 class="text-primary">
+        Latest functions
+    </h1>
+
+    <div class="row">
+        @foreach(var offer in ViewBag.offersList) {
+            <div class="col-4">
+                <div class="card mt-5 rounded shadow" style="width: 22rem;">
+                    <img src="~/uploads/@offer.ImagePath" alt="offer Image" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            @offer.Name
+                        </h4>
+                        <p class="card-text">
+                            @offer.Description
+                        </p>
+                        <a asp-controller="Offer" asp-action="Create" class="btn btn-primary w-100">
+                            View Details
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
 </section>
