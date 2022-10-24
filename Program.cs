@@ -1,5 +1,8 @@
 using BankApp.Data;
+using BankApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +14,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddMvc(options => {
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    options.Filters.Add(new AuthorizeFilter(policy));
+}).AddXmlSerializerFormatters();
 
 var app = builder.Build();
 
@@ -23,7 +30,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();

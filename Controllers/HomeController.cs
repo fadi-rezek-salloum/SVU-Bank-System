@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BankApp.Data;
 using BankApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BankApp.Controllers;
 
@@ -12,6 +13,7 @@ public class HomeController : Controller
     {
         _db = db;
     }
+    [AllowAnonymous]
     public IActionResult Index()
     {
         IEnumerable<Product> productsList = _db.Products;

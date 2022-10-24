@@ -1,0 +1,59 @@
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "List Roles";
+}
+
+<section class="container mt-5 pt-5">
+    <div class="row">
+        <h1 class="text-primary">
+            All Roles
+        </h1>
+
+        @if ( Model.Any())
+        {
+            <a class="btn btn-primary px-5 mb-3" style="width: auto;" asp-controller="Admin" asp-action="CreateRole">
+                Create Role
+                <i class="fa fa-user-plus"></i>
+            </a>
+
+            foreach ( var role in Model )
+            {
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Role Id: @role.Id
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @role.Name
+                        </h5>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-controller="Admin" asp-action="EditRole" asp-route-id="@role.Id" class="btn btn-primary px-5">
+                            Edit
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-header">
+                    No roles created yet 
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Use the button below to create a role
+                    </h5>
+                    <a class="btn btn-primary px-5" style="width: auto;" asp-controller="Admin" asp-action="CreateRole">
+                        Create Role
+                        <i class="fa fa-user-plus"></i>
+                    </a>
+                </div>
+            </div>
+        }
+
+    </div>
+</section>

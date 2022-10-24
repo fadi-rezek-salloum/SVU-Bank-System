@@ -1,4 +1,5 @@
-@model User
+@using BankApp.ViewModels
+@model UserViewModel
 @{
 ViewData["Title"] = "Register User";
 }
@@ -12,7 +13,7 @@ ViewData["Title"] = "Register User";
     <form method="post" asp-action="Register" class="mt-5 w-50 mx-auto">
         <div asp-validation-summary="All" class="text-danger"></div>
         
-        @* <div class="mb-3">
+        <div class="mb-3">
             <label asp-for="FirstName" class="form-label">
                 User's First Name
             </label>
@@ -39,7 +40,7 @@ ViewData["Title"] = "Register User";
             </label>
             <input type="text" asp-for="Address" class="form-control" placeholder="Enter Address..." required>
             <span asp-validation-for="Address" class="text-danger"></span>
-        </div> *@
+        </div>
         <div class="mb-3">
             <label asp-for="Email" class="form-label">
                 User's Email

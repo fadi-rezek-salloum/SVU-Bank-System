@@ -1,0 +1,36 @@
+@{
+ViewData["Title"] = "User Profile";
+}
+
+<section class="container mt-5 pt-5">
+    <div class="row pt-5">
+        <div class="col-6">
+            <img src="~/images/user.png" alt="User" width="250" height="250" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-6">
+            <h1 class="text-primary">
+                <b>User:</b> @ViewBag.user.UserName
+            </h1>
+            <h5>
+                First Name: @ViewBag.user.FirstName, Last Name: @ViewBag.user.LastName 
+            </h5>
+            <h5>
+                Phone: @ViewBag.user.Phone
+            </h5>
+            <h5>
+                Address: @ViewBag.user.Address
+            </h5>
+            <hr>
+            <div class="row mt-5">
+                <a asp-controller="Account" asp-action="EditUser" asp-route-id="@ViewBag.user.Id" class="btn btn-primary">
+                    Edit Profile
+                    <i class="fa fa-user-edit"></i>
+                </a>
+                <a asp-controller="Account" asp-action="DeleteUser" asp-route-id="@ViewBag.user.Id" class="btn btn-danger mt-3">
+                    Delete Profile
+                    <i class="fa fa-trash"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

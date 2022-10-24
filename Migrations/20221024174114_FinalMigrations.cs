@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BankApp.Migrations
 {
-    public partial class AddedIdentity : Migration
+    public partial class FinalMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +37,14 @@ namespace BankApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FirstName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Phone = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Address = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),

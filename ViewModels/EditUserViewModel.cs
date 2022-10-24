@@ -1,12 +1,10 @@
-
-
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
 
-namespace BankApp.Models
+namespace BankApp.ViewModels
 {
-    public class User : IdentityUser
+    public class EditUserViewModel
     {
+        public string Id { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
@@ -16,5 +14,8 @@ namespace BankApp.Models
         public string Phone { get; set; }
         [Required]
         public string Address { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { set; get; }
     }
 }

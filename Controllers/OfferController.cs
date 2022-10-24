@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using BankApp.Data;
 using BankApp.Models;
 using BankApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BankApp.Controllers
 {
@@ -15,13 +16,14 @@ namespace BankApp.Controllers
             _db = db;
             webHostEnvironment = hostEnvironment;
         }
-
+        [Authorize( Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize( Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(OfferViewModel model)
         {
@@ -41,6 +43,7 @@ namespace BankApp.Controllers
             }
             return View();
         }
+        [AllowAnonymous]
         public IActionResult Details(int? id)
         {
             if ( id == null || id == 0 ) {
@@ -56,7 +59,7 @@ namespace BankApp.Controllers
 
             return View();
         }
-
+        [Authorize( Roles = "Admin")]
         public IActionResult Update(int? id)
         {
             if ( id == null || id == 0 ) {
@@ -73,6 +76,7 @@ namespace BankApp.Controllers
             return View(offerFromDb);
         }
         [HttpPost]
+        [Authorize( Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public IActionResult Update(OfferViewModel model, int? id)
         {
@@ -94,6 +98,7 @@ namespace BankApp.Controllers
             }
             return View();
         }
+        [Authorize( Roles = "Admin")]
         public IActionResult Delete(int? id)
         {
             var obj = _db.Offers.Find(id);

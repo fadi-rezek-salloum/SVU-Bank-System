@@ -1,94 +1,194 @@
-﻿@{ ViewData["Title"] = "Home"; }
+﻿@inject SignInManager<User> signInManager
 
+    @{ ViewData["Title"] = "Home"; }
 
-<section id="carouselExampleCaptions" class="carousel slide mt-1 carousel-fade" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div class="carousel-item__inner" id="slider-1">
-                <div class="carousel__content">
-                    <h1 class="fw-bold">
-                        <span class="text-primary text-left">Welcome</span> <br /> to the Syrian National Bank
-                    </h1>
-                </div>
-            </div>
+    <style>
+        .cards-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            margin: 0 0.5em;
+            box-shadow: 2px 6px 8px 0 rgba(0, 0, 0, 0.18);
+            border: none;
+            border-radius: 0;
+        }
+
+        .carousel-inner__function {
+            padding: 1em;
+        }
+
+        .carousel-control-prev__function,
+        .carousel-control-next__function {
+            background-color: #06003f;
+            width: 5vh;
+            height: 5vh;
+            border-radius: 50%;
+        }
+
+        .carousel-control-prev__function {
+            margin-top: 5rem;
+        }
+
+        .carousel-control-next__function {
+            margin-top: 5rem;
+        }
+
+        @@media (min-width: 768px) {
+            .card img {
+                height: 11em;
+            }
+        }
+
+        .offer__container {
+            position: relative;
+            width: 100%;
+        }
+
+        .image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: #004157;
+        }
+
+        .offer__container:hover .overlay {
+            opacity: 1;
+        }
+
+        .text {
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+    </style>
+
+    <section id="carouselExampleCaptions" class="carousel slide mt-1 carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-item">
-            <div class="carousel-item__inner" id="slider-2">
-                <div class="carousel__content">
-                    <h1 class="fw-bold">
-                        <span class="text-primary text-left">First</span> Online Bank In Syria.<br /> Made To Satisfy All Your Needs. 
-                    </h1>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="carousel-item__inner" id="slider-3">
-                <div class="carousel__content">
-                    <h1 class="fw-bold">
-                        <span class="text-primary text-left">Innovative</span>  <br /> Products and Services.
-                    </h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</section>
-
-<section class="container mt-5">
-    <h1 class="text-primary">
-        Functions
-    </h1>
-
-    <div class="row">
-        @foreach(var function in ViewBag.functionsList) {
-            <div class="col-4">
-                <div class="card mt-5 rounded shadow" style="width: 22rem;">
-                    <img src="~/uploads/@function.ImagePath" alt="function Image" class="card-img-top">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            @function.Name
-                        </h4>
-                        <p class="card-text">
-                            @function.Description
-                        </p>
-                        <a asp-controller="Function" asp-action="Details" asp-route-id="@function.Id" class="btn btn-primary w-100">
-                            View Details
-                            <i class="fa fa-arrow-right"></i>
-                        </a>
-                        <a asp-controller="Function" asp-action="Update" asp-route-id="@function.Id" class="btn btn-danger w-100 mt-3">
-                            Update Function
-                            <i class="fa fa-edit"></i>
-                        </a>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="carousel-item__inner" id="slider-1">
+                    <div class="carousel__content">
+                        <h1 class="fw-bold">
+                            <span class="text-primary text-left">Welcome</span> <br /> to the Syrian National Bank
+                        </h1>
                     </div>
                 </div>
             </div>
-        }
-    </div>
+            <div class="carousel-item">
+                <div class="carousel-item__inner" id="slider-2">
+                    <div class="carousel__content">
+                        <h1 class="fw-bold">
+                            <span class="text-primary text-left">First</span> Online Bank In Syria.<br /> Made To
+                            Satisfy All Your Needs.
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-item__inner" id="slider-3">
+                    <div class="carousel__content">
+                        <h1 class="fw-bold">
+                            <span class="text-primary text-left">Innovative</span> <br /> Products and Services.
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </section>
 
-</section>
+    <section class="container mt-5">
+        <h1 class="text-primary">
+            Functions
+        </h1>
 
-<section class="container mt-5">
-    <h1 class="text-primary">
-        Featured Products
-    </h1>
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner carousel-inner__function">
+                @foreach(var function in ViewBag.functionsList) {
+                <div class="carousel-item active">
+                    <div class="cards-wrapper">
+                        <div class="card">
+                            <i class="card-img-top display-1 fa @function.Icon"></i>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    @function.Name
+                                </h5>
+                                <a asp-controller="Function" asp-action="Details" asp-route-id="@function.Id"
+                                    class="btn btn-primary w-100">
+                                    View Details
+                                    <i class="fa fa-arrow-right"></i>
+                                </a>
+                                @if ( signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                {
+                                <a asp-controller="Function" asp-action="Update" asp-route-id="@function.Id"
+                                    class="btn btn-danger w-100 mt-3">
+                                    Update Function
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+            <a class="carousel-control-prev carousel-control-prev__function" data-bs-target="#carouselExampleControls" role="button"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next carousel-control-next__function" data-bs-target="#carouselExampleControls" role="button"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
 
-    <div class="row">
-        @foreach(var product in ViewBag.productsList) {
+    </section>
+
+    <section class="container mt-5">
+        <h1 class="text-primary">
+            Featured Products
+        </h1>
+
+        <div class="row">
+            @foreach(var product in ViewBag.productsList) {
             <div class="col-4">
                 <div class="card mt-5 rounded shadow" style="width: 22rem;">
                     <img src="~/uploads/@product.ImagePath" alt="Product Image" class="card-img-top">
@@ -99,51 +199,63 @@
                         <p class="card-text">
                             @product.Description
                         </p>
-                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary w-100">
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id"
+                            class="btn btn-primary w-100">
                             View Details
                             <i class="fa fa-arrow-right"></i>
                         </a>
-                        <a asp-controller="Product" asp-action="Update" asp-route-id="@product.Id" class="btn btn-danger w-100 mt-3">
+                        @if ( signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                        <a asp-controller="Product" asp-action="Update" asp-route-id="@product.Id"
+                            class="btn btn-danger w-100 mt-3">
                             Update Product
                             <i class="fa fa-edit"></i>
                         </a>
+                        }
                     </div>
                 </div>
             </div>
-        }
-    </div>
+            }
+        </div>
 
-</section>
+    </section>
 
-<section class="container my-5">
-    <h1 class="text-primary">
-        Latest Offers
-    </h1>
+    <section class="container my-5">
+        <h1 class="text-primary">
+            Latest Offers
+        </h1>
 
-    <div class="row">
-        @foreach(var offer in ViewBag.offersList) {
+        <div class="row">
+            @foreach(var offer in ViewBag.offersList) {
             <div class="col-4">
-                <div class="card mt-5 rounded shadow" style="width: 22rem;">
-                    <img src="~/uploads/@offer.ImagePath" alt="offer Image" class="card-img-top">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            @offer.Name
-                        </h4>
-                        <p class="card-text">
-                            @offer.Description
-                        </p>
-                        <a asp-controller="Offer" asp-action="Details" asp-route-id="@offer.Id" class="btn btn-primary w-100">
-                            View Details
-                            <i class="fa fa-arrow-right"></i>
-                        </a>
-                        <a asp-controller="Offer" asp-action="Update" asp-route-id="@offer.Id" class="btn btn-danger w-100 mt-3">
-                            Update Offer
-                            <i class="fa fa-edit"></i>
-                        </a>
+                <div class="offer__container">
+                    <img src="~/uploads/@offer.ImagePath" alt="Offer" class="image">
+                    <div class="overlay">
+                        <div class="text">
+                            <h1>
+                                @offer.Name
+                            </h1>
+                            <p>
+                                @offer.Description
+                            </p>
+                            <a asp-controller="Offer" asp-action="Details" asp-route-id="@offer.Id"
+                                class="btn btn-primary w-100">
+                                View Details
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                            @if ( signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                            <a asp-controller="Offer" asp-action="Update" asp-route-id="@offer.Id"
+                                class="btn btn-danger w-100 mt-3">
+                                Update Offer
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        }
-    </div>
+            }
+        </div>
 
-</section>
+    </section>
