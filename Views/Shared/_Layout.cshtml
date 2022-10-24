@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<IdentityUser> signInManager
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -83,14 +85,29 @@
                                 <img src="~/images/user.png" width="50" height="50" alt="User Logo" class="img-fluid" />
                             </a>
                             <div class="dropdown-menu navbar__dropdown">
-                                <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">
-                                    <i class="fa-solid fa-arrow-right-to-bracket pe-2"></i>
-                                    Login
-                                </a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Register">
-                                    <i class="fa-solid fa-user-plus pe-2"></i>
-                                    Register
-                                </a>
+
+                                @if ( signInManager.IsSignedIn(User))
+                                {
+                                    <span class="text-center fw-bold px-2">
+                                        @User.Identity.Name
+                                    </span>
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">
+                                        <i class="fa-solid fa-sign-out pe-2"></i>
+                                        Logout
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">
+                                        <i class="fa-solid fa-arrow-right-to-bracket pe-2"></i>
+                                        Login
+                                    </a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Register">
+                                        <i class="fa-solid fa-user-plus pe-2"></i>
+                                        Register
+                                    </a>
+                                }
                             </div>
                         </li>
                     </ul>

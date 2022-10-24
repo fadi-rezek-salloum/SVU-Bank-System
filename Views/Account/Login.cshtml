@@ -1,0 +1,38 @@
+@model User
+@{
+ViewData["Title"] = "Login User";
+}
+
+<section class="container mt-5 pt-5">
+    <h1 class="text-primary mt-5">
+        Login
+    </h1>
+    <hr />
+
+    <form method="post" class="mt-5 w-50 mx-auto">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">
+                User's Email
+            </label>
+            <input type="email" asp-for="Email" class="form-control" placeholder="Enter Email..." required>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">
+                User's Password
+            </label>
+            <input type="password" asp-for="Password" class="form-control" placeholder="Enter Password..." required>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="mb-5">
+            <button type="submit" class="btn btn-primary w-100">
+                Login
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            </button>
+        </div>
+    </form>
+
+</section>
